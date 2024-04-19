@@ -37,3 +37,12 @@ Inside the constructor, it calls the parent class's (Exception) constructor usin
 __str__ method: This method returns a string representation of the exception. In this case, it returns the detailed error message stored in self.error_message.
 Overall, this code provides a way to create custom exceptions with detailed error messages, including information like the filename, line number, and the error message itself. It's a useful pattern for debugging and error handling.
 '''
+
+if __name__=="__main__":
+    try:
+        a=1
+        b='bv'
+        c=a+b
+    except Exception as e:
+        logging.info("Different datatype cannot be added")
+        raise CustomException(e,sys)
