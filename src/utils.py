@@ -51,6 +51,8 @@ It predicts the target values for both training and testing data.
 It calculates the R^2 score for both training and testing predictions.
 It stores the test R^2 score in a dictionary (report) with the model name as the key.
 If any exception occurs during this process, it raises a CustomException.'''
+
+
 '''
 This function takes several arguments:
 X_train: Training features.
@@ -64,6 +66,7 @@ param: A dictionary of hyperparameter grids for each model.
 '''
 def evaluate_models(X_train, y_train,X_test,y_test,models,param):
     try:
+        '''Initializes an empty dictionary report to store the evaluation results of each model.'''
         report = {}
 
         for i in range(len(list(models))):
