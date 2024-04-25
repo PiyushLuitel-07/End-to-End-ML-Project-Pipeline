@@ -64,6 +64,14 @@ y_test: Target values for the testing set.
 models: A dictionary of models to evaluate.
 param: A dictionary of hyperparameter grids for each model.
 
+for i in range(len(list(models))):: This line iterates over each model in the models dictionary. len(list(models)) calculates the number of models in the dictionary, and range() creates a sequence of numbers from 0 to len(models) - 1, which corresponds to the indices of the models.
+model = list(models.values())[i]: Inside the loop, this line extracts the model object at the current index i from the models dictionary. list(models.values()) gets a list of all the model objects, and [i] retrieves the model object at index i.
+para=param[list(models.keys())[i]]: This line extracts the corresponding parameter dictionary for the current model from the param dictionary. list(models.keys()) gets a list of all the model names, and [i] retrieves the model name at index i. Then, this model name is used as a key to retrieve the parameter dictionary from the param dictionary.
+gs = GridSearchCV(model, para, cv=3): Here, a GridSearchCV object gs is instantiated. GridSearchCV is a method for hyperparameter tuning. It takes the model (model), the parameter grid (para), and the number of cross-validation folds (cv=3) as arguments.
+gs.fit(X_train, y_train): This line fits the GridSearchCV object gs to the training data (X_train and y_train). It performs an exhaustive search over the specified parameter grid (para) and selects the best parameters based on cross-validation performance.
+model.set_params(**gs.best_params_): After the grid search, this line updates the parameters of the original model (model) with the best parameters found by the grid search. gs.best_params_ contains the best parameter values selected by the grid search.
+model.fit(X_train, y_train): Finally, the model (model) is trained on the entire training data (X_train and y_train) using the updated parameters obtained from grid search.
+Overall, this loop iterates over each model in the models dictionary, performs grid search cross-validation to tune hyperparameters, and then trains each model on the training data using the best parameters found by grid search.
 
 '''
 def evaluate_models(X_train, y_train,X_test,y_test,models,param):
@@ -109,3 +117,18 @@ def load_object(file_path):
 
     except Exception as e:
         raise CustomException(e, sys)
+    
+
+'''
+
+Grid search validation is a technique used for hyperparameter tuning in machine learning. It's a systematic method to find the best combination of hyperparameters for a given model by searching through a specified grid of hyperparameter values.
+
+Here's how grid search validation works:
+
+Define Hyperparameter Grid: First, you specify a grid of hyperparameters and their corresponding values that you want to search over. For example, if you're training a support vector machine (SVM) model, you might want to tune parameters like the kernel type, C (regularization parameter), and gamma.
+Create a Search Space: Grid search creates a search space by considering all possible combinations of hyperparameters from the grid. Each combination represents a point in the search space.
+Cross-Validation: For each combination of hyperparameters, grid search typically uses k-fold cross-validation to evaluate the model's performance. It divides the training data into k subsets (or folds), trains the model on k-1 folds, and evaluates it on the remaining fold. This process is repeated k times, and the average performance metric (e.g., accuracy, mean squared error) is computed across all folds.
+Select Best Parameters: After evaluating the model's performance for each combination of hyperparameters, grid search selects the combination that produces the best performance according to a specified evaluation metric. This could be the highest accuracy, lowest error, etc.
+Final Model Training: Finally, the model is trained using the entire training dataset with the best hyperparameters selected during the grid search process.
+Grid search validation is beneficial because it automates the process of hyperparameter tuning, which can be tedious and time-consuming when done manually. It systematically explores the hyperparameter space and helps to find the optimal set of hyperparameters that yield the best performance for the model.
+'''
