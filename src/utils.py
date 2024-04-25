@@ -10,8 +10,10 @@ r2_score: A function to calculate the R^2 (coefficient of determination) regress
 GridSearchCV: A class for performing grid search with cross-validation to find the best hyperparameters for a model.
 CustomException: Custom exception class, presumably for handling exceptions in a custom way.
 '''
-import os
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np 
 import pandas as pd
 import dill

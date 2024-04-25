@@ -61,17 +61,18 @@ splitting it into training and test sets, transforming the data, and training a 
 
 import os
 import sys
-from src.exception import CustomException
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from src.logger import logging
 import pandas as pd
-
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass  #used to create class variable
 
 from src.component.data_transformation import DataTransformation
 from src.component.data_transformation import DataTransformationConfig
+from src.exception import CustomException
 
 # from src.component.model_trainer import model
+
 
 @dataclass
 class DataIngestionConfig:
