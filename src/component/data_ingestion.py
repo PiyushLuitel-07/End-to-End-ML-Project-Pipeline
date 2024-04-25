@@ -71,8 +71,8 @@ from src.component.data_transformation import DataTransformation
 from src.component.data_transformation import DataTransformationConfig
 from src.exception import CustomException
 
-from src.components.model_trainer import ModelTrainerConfig
-from src.components.model_trainer import ModelTrainer
+from src.component.model_trainer import ModelTrainer
+from src.component.model_trainer import ModelTrainerConfig
 
 
 @dataclass
